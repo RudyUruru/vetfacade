@@ -28,7 +28,7 @@ public class ClientService {
     }
 
 
-    public AnalysisEntity getAnalysis(Long id) {
+    public AnalysisEntity getAnalysis(String email) {
         return new AnalysisEntity();
     }
 
@@ -36,9 +36,9 @@ public class ClientService {
         return new ConfigurationEntity();
     }
 
-    public ClientEntity getClientInfo(Long id) {
+    public ClientEntity getClientInfo(String email) {
         StringBuilder uri = new StringBuilder(api);
-        uri.append("client_info?id=").append(id);
+        uri.append("client_info?email=").append(email);
         return ClientEntity.toEntity(localApiClient
                 .get()
                 .uri(uri.toString())
@@ -46,9 +46,9 @@ public class ClientService {
                 .bodyToMono(ClientDTO.class).block(REQUEST_TIMEOUT));
     }
 
-    public List<VisitEntity> getVisits(Long id, Long kind_id, Long breed_id, LocalDateTime date1, LocalDateTime date2, Integer max_count) {
+    public List<VisitEntity> getVisits(String email, Long kind_id, Long breed_id, LocalDateTime date1, LocalDateTime date2, Integer max_count) {
         StringBuilder uri = new StringBuilder(api);
-        uri.append("visits?id=").append(id);
+        uri.append("visits?email=").append(email);
         if (kind_id!=null)
             uri.append("&kind_id=").append(kind_id);
         if (breed_id!=null)

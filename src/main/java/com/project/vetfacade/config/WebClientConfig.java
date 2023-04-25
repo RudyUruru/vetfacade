@@ -6,8 +6,11 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 public class WebClientConfig {
+    public WebClientConfig() {
+    }
+
     @Bean
     public WebClient localApiClient() {
-        return WebClient.create("http://localhost:8080/");
+        return WebClient.create("http://repository:8080/");
     }
 }

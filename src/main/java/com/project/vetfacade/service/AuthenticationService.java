@@ -1,6 +1,6 @@
 package com.project.vetfacade.service;
 
-import com.project.vetfacade.dto.AuthenticationRequest;
+/*import com.project.vetfacade.dto.AuthenticationRequest;
 import com.project.vetfacade.dto.AuthenticationResponse;
 import com.project.vetfacade.dto.RegisterRequest;
 import com.project.vetfacade.user.Role;
@@ -46,4 +46,4 @@ public class AuthenticationService {
                 .token(jwtToken)
                 .build();
     }
-}
+}*/

@@ -19,7 +19,9 @@ public class AppointmentDTO {
 
     private LocalDateTime date;
 
-    private String value;
+    private String description;
+
+    private AppointmentType type;
 
     private String doctor_name;
 }

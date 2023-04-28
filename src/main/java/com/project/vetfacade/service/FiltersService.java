@@ -25,9 +25,9 @@ public class FiltersService {
     }
 
 
-    public List<BreedEntity> getBreeds(String email) {
+    public List<BreedEntity> getBreeds(Long id) {
         StringBuilder uri = new StringBuilder(api);
-        uri.append("all_breeds?email=").append(email);
+        uri.append("all_breeds?id=").append(id);
         List<BreedDataDTO> breeds = localApiClient
                 .get()
                 .uri(uri.toString())
@@ -36,9 +36,9 @@ public class FiltersService {
         return breeds.stream().map(BreedEntity::toEntity).toList();
     }
 
-    public List<KindEntity> getKinds(String email) {
+    public List<KindEntity> getKinds(Long id) {
         StringBuilder uri = new StringBuilder(api);
-        uri.append("all_kinds?email=").append(email);
+        uri.append("all_kinds?id=").append(id);
         List<TreesDataDTO> kinds = localApiClient
                 .get()
                 .uri(uri.toString())

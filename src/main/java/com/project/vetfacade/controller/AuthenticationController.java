@@ -1,5 +1,6 @@
 package com.project.vetfacade.controller;
 
+/*
 import com.project.vetfacade.dto.AuthenticationRequest;
 import com.project.vetfacade.dto.AuthenticationResponse;
 import com.project.vetfacade.dto.RegisterRequest;
@@ -33,3 +34,4 @@ public class AuthenticationController {
     }
 
 }
+*/

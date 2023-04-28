@@ -1,16 +1,18 @@
 package com.project.vetfacade.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 public class WebClientConfig {
-    public WebClientConfig() {
-    }
+    @Value("${allowed.webclient}")
+    private String webclient;
+
 
     @Bean
     public WebClient localApiClient() {
-        return WebClient.create("http://repository:8080/");
+        return WebClient.create(webclient);
     }
 }

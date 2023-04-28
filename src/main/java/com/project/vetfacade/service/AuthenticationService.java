@@ -8,34 +8,39 @@ import com.project.vetfacade.user.Role;
 import com.project.vetfacade.user.User;
 import com.project.vetfacade.user.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
 
-    private final UserRepository repository;
+    private final UserRepository userRepo;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final MailSenderService mailSender;
 
-    public void register(RegisterRequest request) {
+    public boolean register(String email) {
+        if (!userRepo.findByEmail(email).isEmpty())
+            return false;
         var user = User.builder()
-                .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
+                .email(email)
                 .role(Role.USER)
+                .activationCode(UUID.randomUUID().toString())
                 .build();
-        repository.save(user);
+        userRepo.save(user);
+        return true;
     }
 
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-        var user = repository.findByEmail(request.getEmail()).orElseThrow();
+        var user = userRepo.findByEmail(request.getEmail()).orElseThrow();
         var jwtRefreshToken = jwtService.generateRefreshToken(user);
         var jwtAccessToken = jwtService.generateAccessToken(user);
         return AuthenticationResponse.builder()
@@ -46,7 +51,7 @@ public class AuthenticationService {
 
     public RefreshTokenResponse refreshAccessToken(String refresh_token) {
         String email = jwtService.extractUsername(refresh_token);
-        var user = repository.findByEmail(email).orElseThrow();
+        var user = userRepo.findByEmail(email).orElseThrow();
         String accessToken = "";
         if (jwtService.isTokenValid(refresh_token, user)) {
             accessToken = jwtService.generateAccessToken(user);
@@ -57,5 +62,15 @@ public class AuthenticationService {
         return RefreshTokenResponse.builder()
                 .access_token(accessToken)
                 .build();
+    }
+
+    public boolean activateUser(String code, String password) {
+        User user = userRepo.findByActivationCode(code);
+        if (user == null)
+            return false;
+        user.setActivationCode(null);
+        user.setPassword(passwordEncoder.encode(password));
+        userRepo.save(user);
+        return true;
     }
 }

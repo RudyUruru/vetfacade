@@ -8,9 +8,11 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 public class WebClientConfig {
     @Value("${allowed.webclient}")
-    private String webClient;
+    private String webclient;
+
+
     @Bean
     public WebClient localApiClient() {
-        return WebClient.create(webClient);
+        return WebClient.create(webclient);
     }
 }

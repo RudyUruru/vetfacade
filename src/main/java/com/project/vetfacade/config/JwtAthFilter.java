@@ -1,6 +1,6 @@
 package com.project.vetfacade.config;
 
-/*import com.project.vetfacade.service.JwtService;
+import com.project.vetfacade.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -50,4 +50,4 @@ public class JwtAthFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request, response);
     }
-}*/
+}

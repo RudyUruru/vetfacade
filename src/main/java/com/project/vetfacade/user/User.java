@@ -1,6 +1,6 @@
 package com.project.vetfacade.user;
 
-/*import jakarta.persistence.*;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,13 +24,11 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String first_name;
-
-    private String last_name;
-
     private String email;
 
     private String password;
+
+    private String activationCode;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -69,4 +67,4 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-}*/
+}

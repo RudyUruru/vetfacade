@@ -4,9 +4,11 @@ package com.project.vetfacade.controller;
 import com.project.vetfacade.UserInfo;
 import com.project.vetfacade.bisentity.PetLightEntity;
 import com.project.vetfacade.service.PetService;
+import com.project.vetfacade.user.User;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,10 +24,11 @@ public class PetController {
 
     //посмотреть
     @GetMapping("/pets")
-    public ResponseEntity<List<PetLightEntity>> getPetsFiltered(/*@RequestParam Long id,*/
-                                                                @RequestParam @Nullable Long kind_id,
-                                                                @RequestParam @Nullable Long breed_id,
-                                                                @RequestParam @Nullable Integer max_count) {
-        return ResponseEntity.ok(petService.getPets(UserInfo.ID, kind_id, breed_id, max_count));
+    public ResponseEntity<List<PetLightEntity>> getPetsFiltered(
+            @RequestParam @Nullable Long kind_id,
+            @RequestParam @Nullable Long breed_id,
+            @RequestParam @Nullable Integer max_count) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return ResponseEntity.ok(petService.getPets(user.getEmail(), kind_id, breed_id, max_count));
     }
 }

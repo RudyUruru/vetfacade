@@ -1,6 +1,6 @@
 package com.project.vetfacade.service;
 
-/*import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -18,6 +18,10 @@ import java.util.function.Function;
 public class JwtService {
 
     private String SECRET_KEY = "294A404E635266556A586E5A7234753778214125442A472D4B6150645367566B";
+
+    private static final long ACCESS_TOKEN_VALIDITY_SECONDS = 1800; // 30 минут
+    private static final long REFRESH_TOKEN_VALIDITY_SECONDS = 604800; // 1 неделя
+
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -44,19 +48,19 @@ public class JwtService {
         return extractExpiration(token).before(new Date());
     }
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateRefreshToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        return generateToken(claims, userDetails);
+        return generateRefreshToken(claims, userDetails);
     }
 
-    private String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+    private String generateRefreshToken(Map<String, Object> extraClaims, UserDetails userDetails) {
 
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+                .setExpiration(new Date(System.currentTimeMillis() + REFRESH_TOKEN_VALIDITY_SECONDS * 1000))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -69,4 +73,34 @@ public class JwtService {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }
-}*/
+
+    public String generateAccessToken(UserDetails userDetails) {
+        Map<String, Object> claims = new HashMap<>();
+        return generateAccessToken(claims, userDetails);
+    }
+
+    private String generateAccessToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+
+        return Jwts
+                .builder()
+                .setClaims(extraClaims)
+                .setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS * 1000))
+                .signWith(getSignInKey(), SignatureAlgorithm.HS256)
+                .compact();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

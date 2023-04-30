@@ -23,9 +23,9 @@ public class PetService {
         this.localApiClient = localApiClient;
     }
 
-    public List<PetLightEntity> getPets(Long id, Long kind_id, Long breed_id, Integer max_count) {
+    public List<PetLightEntity> getPets(String email, Long kind_id, Long breed_id, Integer max_count) {
         StringBuilder uri = new StringBuilder(api);
-        uri.append("pets?id=").append(id);
+        uri.append("pets?email=").append(email);
         if (kind_id!=null)
             uri.append("&kind_id=").append(kind_id);
         if (breed_id!=null)

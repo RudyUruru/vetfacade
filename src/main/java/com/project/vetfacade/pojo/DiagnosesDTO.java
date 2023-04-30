@@ -12,4 +12,6 @@ public class DiagnosesDTO {
     private Long diagnosis_id;
 
     private String diagnosis_name;
+
+    private TreesDataDTO diagnosis_type;
 }

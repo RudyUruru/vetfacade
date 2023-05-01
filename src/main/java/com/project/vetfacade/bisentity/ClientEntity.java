@@ -1,6 +1,7 @@
 package com.project.vetfacade.bisentity;
 
 import com.project.vetfacade.pojo.ClientDTO;
+import com.project.vetfacade.pojo.ClientLightDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,7 +20,7 @@ public class ClientEntity {
     public ClientEntity() {
     }
 
-    public static ClientEntity toEntity(ClientDTO dto) {
+    public static ClientEntity toEntity(ClientLightDTO dto) {
         ClientEntity entity = new ClientEntity();
         entity.setClient_id(dto.getClient_id());
         entity.setName(dto.getFirst_name());

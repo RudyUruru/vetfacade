@@ -5,6 +5,7 @@ import com.project.vetfacade.bisentity.ClientEntity;
 import com.project.vetfacade.bisentity.ConfigurationEntity;
 import com.project.vetfacade.bisentity.VisitEntity;
 import com.project.vetfacade.pojo.ClientDTO;
+import com.project.vetfacade.pojo.ClientLightDTO;
 import com.project.vetfacade.pojo.VisitDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -43,7 +44,7 @@ public class ClientService {
                 .get()
                 .uri(uri.toString())
                 .retrieve()
-                .bodyToMono(ClientDTO.class).block(REQUEST_TIMEOUT));
+                .bodyToMono(ClientLightDTO.class).block(REQUEST_TIMEOUT));
     }
 
     public List<VisitEntity> getVisits(String email, Long kind_id, Long breed_id, LocalDateTime date1, LocalDateTime date2, Integer max_count) {

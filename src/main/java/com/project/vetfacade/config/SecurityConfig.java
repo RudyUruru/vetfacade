@@ -1,6 +1,7 @@
 package com.project.vetfacade.config;
 
 
+import com.project.vetfacade.user.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,7 +27,7 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v5/auth/**")
+                .requestMatchers("/api/v5/auth/*", "/registration/*")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -38,8 +39,4 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-
-
-
-
 }

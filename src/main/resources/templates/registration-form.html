@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация пользователя</title>
+</head>
+<body>
+<h1>Регистрация пользователя</h1>
+<form action="#" th:action="@{/registration/register}" method="post">
+    <div>
+        <label for="email">Введите свой email:</label>
+        <input type="email" id="email" name="email" required th:required="true">
+    </div>
+    <div>
+        <button type="submit">Отправить</button>
+    </div>
+</form>
+</body>
+</html>

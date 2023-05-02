@@ -1,9 +1,6 @@
 package com.project.vetfacade.service;
 
-import com.project.vetfacade.dto.AuthenticationRequest;
-import com.project.vetfacade.dto.AuthenticationResponse;
-import com.project.vetfacade.dto.RefreshTokenResponse;
-import com.project.vetfacade.dto.RegisterRequest;
+import com.project.vetfacade.dto.*;
 import com.project.vetfacade.user.Role;
 import com.project.vetfacade.user.User;
 import com.project.vetfacade.user.UserRepository;
@@ -12,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.UUID;
 
@@ -20,22 +18,8 @@ import java.util.UUID;
 public class AuthenticationService {
 
     private final UserRepository userRepo;
-    private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-    private final MailSenderService mailSender;
-
-    public boolean register(String email) {
-        if (!userRepo.findByEmail(email).isEmpty())
-            return false;
-        var user = User.builder()
-                .email(email)
-                .role(Role.USER)
-                .activationCode(UUID.randomUUID().toString())
-                .build();
-        userRepo.save(user);
-        return true;
-    }
 
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
@@ -49,7 +33,8 @@ public class AuthenticationService {
                 .build();
     }
 
-    public RefreshTokenResponse refreshAccessToken(String refresh_token) {
+    public RefreshTokenResponse refreshAccessToken(RefreshTokenRequest refresh) {
+        String refresh_token = refresh.getRefresh_token();
         String email = jwtService.extractUsername(refresh_token);
         var user = userRepo.findByEmail(email).orElseThrow();
         String accessToken = "";
@@ -64,13 +49,5 @@ public class AuthenticationService {
                 .build();
     }
 
-    public boolean activateUser(String code, String password) {
-        User user = userRepo.findByActivationCode(code);
-        if (user == null)
-            return false;
-        user.setActivationCode(null);
-        user.setPassword(passwordEncoder.encode(password));
-        userRepo.save(user);
-        return true;
-    }
+
 }

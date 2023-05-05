@@ -8,13 +8,14 @@ import com.project.vetfacade.user.User;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
 @CrossOrigin(origins = "http://localhost:3000")
+@RestController
 @RequestMapping("/api/v1")
 public class PetController {
     @Autowired
@@ -29,4 +30,9 @@ public class PetController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return ResponseEntity.ok(petService.getPets(user.getEmail(), kind_id, breed_id, max_count));
     }
+    @GetMapping("/pets_name")
+    public ResponseEntity<List<PetLightEntity>> getPetsByName(@RequestParam String name, @AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(petService.getPetsByName(user.getEmail(), name));
+    }
+
 }

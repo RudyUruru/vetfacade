@@ -39,4 +39,16 @@ public class PetService {
                 .bodyToMono(new ParameterizedTypeReference<List<PetLightDTO>>() {}).block(REQUEST_TIMEOUT);
         return pets.stream().map(PetLightEntity::toEntity).toList();
     }
+
+    public List<PetLightEntity> getPetsByName(String email, String name) {
+        StringBuilder uri = new StringBuilder(api);
+        uri.append("/pets_name?email=").append(email);
+        uri.append("&name=").append(name);
+        List<PetLightDTO> pets = localApiClient
+                .get()
+                .uri(uri.toString())
+                .retrieve()
+                .bodyToMono(new ParameterizedTypeReference<List<PetLightDTO>>() {}).block(REQUEST_TIMEOUT);
+        return pets.stream().map(PetLightEntity::toEntity).toList();
+    }
 }

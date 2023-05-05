@@ -29,8 +29,12 @@ public class VisitEntity {
         entity.setDate(dto.getDate());
         dto.getDiagnoses().forEach(xPetsDiagnosis -> entity.getDiagnoses().add(xPetsDiagnosis.getDiagnosis()));
         entity.setPet(PetEntity.toEntity(dto.getPet()));
-        entity.setType(dto.getType());
         entity.setFirst_visit_id(dto.getFirst_visit_id());
+        switch(dto.getType()) {
+            case 101: entity.setType(VisitType.FIRST); break;
+            case 102: entity.setType(VisitType.SECONDARY); break;
+            case 112: entity.setType(VisitType.VACCINATION); break;
+        }
         return entity;
     }
     public VisitEntity() {}

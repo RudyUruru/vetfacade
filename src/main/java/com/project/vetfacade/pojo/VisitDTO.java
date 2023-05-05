@@ -26,7 +26,7 @@ public class VisitDTO {
 
     private String recommendation;
 
-    private VisitType type;
+    private Integer type;
 
     private Long first_visit_id;
 

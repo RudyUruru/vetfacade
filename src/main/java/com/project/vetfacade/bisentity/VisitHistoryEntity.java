@@ -33,7 +33,11 @@ public class VisitHistoryEntity {
         dto.getDiagnoses().forEach(xPetsDiagnosis -> entity.getDiagnoses().add(xPetsDiagnosis.getDiagnosis()));
         entity.setPrescription(dto.getPrescription());
         entity.setRecommendation(dto.getRecommendation());
-        entity.setType(dto.getType());
+        switch(dto.getType()) {
+            case 101: entity.setType(VisitType.FIRST); break;
+            case 102: entity.setType(VisitType.SECONDARY); break;
+            case 112: entity.setType(VisitType.VACCINATION); break;
+        }
         entity.setFirst_visit_id(dto.getFirst_visit_id());
         return entity;
     }

@@ -1,5 +1,6 @@
 package com.project.vetfacade.config;
 
+/*
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +11,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class CorsConfig implements WebMvcConfigurer {
     @Value("${allowed.origin}")
     private String allowedOrigin;
-    /*@Bean
+    */
+/*@Bean
     public WebMvcConfigurer getCorsConfiguration() {
         return new WebMvcConfigurer() {
             @Override
@@ -21,7 +23,8 @@ public class CorsConfig implements WebMvcConfigurer {
                         .allowedHeaders("*");
             }
         };
-    }*/
+    }*//*
+
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -31,3 +34,4 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowedOrigins(allowedOrigin);
     }
 }
+*/

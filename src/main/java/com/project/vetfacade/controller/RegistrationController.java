@@ -11,8 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-@Controller
 @CrossOrigin(origins = "http://localhost:3000")
+@Controller
 @RequestMapping("/registration")
 public class RegistrationController {
 

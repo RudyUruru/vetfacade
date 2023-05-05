@@ -26,7 +26,7 @@ public class RegistrationService {
             return "registration-failure";
         }
         user.setActivationCode(UUID.randomUUID().toString());
-        String confirmationUrl = "http://localhost:8090/registration/activate?code=" + user.getActivationCode();
+        String confirmationUrl = "http://45.141.79.132:8090/registration/activate?code=" + user.getActivationCode();
         String body = "Для активации аккаунта перейдите по ссылке: " + confirmationUrl;
         mailSender.send(user.getEmail(),
                 "Код активации",

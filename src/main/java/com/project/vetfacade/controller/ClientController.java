@@ -9,14 +9,15 @@ import com.project.vetfacade.user.User;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@RestController
 @CrossOrigin(origins = "http://localhost:3000")
+@RestController
 @RequestMapping("/api/v2")
 public class ClientController {
 
@@ -39,8 +40,7 @@ public class ClientController {
     }
 
     @GetMapping("/client_info")
-    public ResponseEntity<ClientEntity> getClientFullName() {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public ResponseEntity<ClientEntity> getClientFullName(@AuthenticationPrincipal User user) {
         return ResponseEntity.ok(clientService.getClientInfo(user.getEmail()));
     }
 
@@ -60,3 +60,4 @@ public class ClientController {
         return ResponseEntity.ok(clientService.getVisits(user.getEmail(), kind_id, breed_id, date1, date2, max_count));
     }
 }
+

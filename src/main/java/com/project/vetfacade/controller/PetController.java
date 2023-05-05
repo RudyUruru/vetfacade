@@ -26,9 +26,10 @@ public class PetController {
     public ResponseEntity<List<PetLightEntity>> getPetsFiltered(
             @RequestParam @Nullable Long kind_id,
             @RequestParam @Nullable Long breed_id,
+            @RequestParam @Nullable String name,
             @RequestParam @Nullable Integer max_count) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return ResponseEntity.ok(petService.getPets(user.getEmail(), kind_id, breed_id, max_count));
+        return ResponseEntity.ok(petService.getPets(user.getEmail(), kind_id, breed_id, name, max_count));
     }
     @GetMapping("/pets_name")
     public ResponseEntity<List<PetLightEntity>> getPetsByName(@RequestParam String name, @AuthenticationPrincipal User user) {

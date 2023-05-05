@@ -23,20 +23,23 @@ public class PetService {
         this.localApiClient = localApiClient;
     }
 
-    public List<PetLightEntity> getPets(String email, Long kind_id, Long breed_id, Integer max_count) {
+    public List<PetLightEntity> getPets(String email, Long kind_id, Long breed_id, String name, Integer max_count) {
         StringBuilder uri = new StringBuilder(api);
         uri.append("pets?email=").append(email);
-        if (kind_id!=null)
+        if (kind_id != null)
             uri.append("&kind_id=").append(kind_id);
-        if (breed_id!=null)
+        if (breed_id != null)
             uri.append("&breed_id=").append(breed_id);
-        if (max_count!=null)
+        if (name != null)
+            uri.append("&name=").append(name);
+        if (max_count != null)
             uri.append("&max_count=").append(max_count);
         List<PetLightDTO> pets = localApiClient
                 .get()
                 .uri(uri.toString())
                 .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<List<PetLightDTO>>() {}).block(REQUEST_TIMEOUT);
+                .bodyToMono(new ParameterizedTypeReference<List<PetLightDTO>>() {
+                }).block(REQUEST_TIMEOUT);
         return pets.stream().map(PetLightEntity::toEntity).toList();
     }
 
@@ -48,7 +51,8 @@ public class PetService {
                 .get()
                 .uri(uri.toString())
                 .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<List<PetLightDTO>>() {}).block(REQUEST_TIMEOUT);
+                .bodyToMono(new ParameterizedTypeReference<List<PetLightDTO>>() {
+                }).block(REQUEST_TIMEOUT);
         return pets.stream().map(PetLightEntity::toEntity).toList();
     }
 }

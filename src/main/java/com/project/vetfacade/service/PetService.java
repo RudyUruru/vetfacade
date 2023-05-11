@@ -5,6 +5,7 @@ import com.project.vetfacade.pojo.PetLightDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.time.Duration;
@@ -23,6 +24,7 @@ public class PetService {
         this.localApiClient = localApiClient;
     }
 
+    @CrossOrigin(origins = "*")
     public List<PetLightEntity> getPets(String email, Long kind_id, Long breed_id, String name, Integer max_count) {
         StringBuilder uri = new StringBuilder(api);
         uri.append("pets?email=").append(email);

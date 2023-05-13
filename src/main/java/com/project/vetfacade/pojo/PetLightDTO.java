@@ -24,6 +24,8 @@ public class PetLightDTO {
 
     private LocalDateTime birthday;
 
+    private String chipNumber;
+
     private Short sterilized;
 
     private ClientDTO owner;

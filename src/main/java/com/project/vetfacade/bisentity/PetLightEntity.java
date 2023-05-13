@@ -20,6 +20,7 @@ public class PetLightEntity {
     private String name;
     private KindEntity kind;
     private BreedEntity breed;
+    private String chip_number;
 
     public static PetLightEntity toEntity(PetLightDTO dto) {
         PetLightEntity entity = new PetLightEntity();
@@ -35,6 +36,9 @@ public class PetLightEntity {
             entity.setBirthday(dto.getBirthday());
         entity.setName(dto.getName());
         entity.setKind(KindEntity.toEntity(dto.getKind()));
+        if (dto.getChipNumber() != null) {
+            entity.setChip_number(dto.getChipNumber());
+        }
         if (dto.getBreed() != null) {
             entity.setBreed(BreedEntity.toEntity(dto.getBreed()));
         }

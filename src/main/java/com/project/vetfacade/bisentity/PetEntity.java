@@ -1,5 +1,7 @@
 package com.project.vetfacade.bisentity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.project.vetfacade.pojo.PetDTO;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +20,8 @@ public class PetEntity {
     private SexEntity sex;
     private LocalDateTime birthday;
     private KindEntity kind;
+    @JsonProperty("chip_number")
+    private String chipNumber;
 
 
 
@@ -40,6 +44,9 @@ public class PetEntity {
         entity.setSex(SexEntity.toEntity(dto.getSex()));
         if (dto.getBirthday() != null) {
             entity.setBirthday(dto.getBirthday());
+        }
+        if (dto.getChipNumber() != null) {
+            entity.setChipNumber(dto.getChipNumber());
         }
         entity.setKind(KindEntity.toEntity(dto.getKind()));
         return entity;

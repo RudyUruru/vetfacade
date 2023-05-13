@@ -1,5 +1,6 @@
 package com.project.vetfacade.pojo;
 
+import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,6 +26,9 @@ public class PetDTO {
     private Short sterilized;
 
     private TreesDataDTO kind;
+
+
+    private String chipNumber;
 
     private DictionariesDataDTO color;
 

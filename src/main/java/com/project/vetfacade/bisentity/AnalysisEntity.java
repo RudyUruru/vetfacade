@@ -1,10 +1,12 @@
 package com.project.vetfacade.bisentity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 //TODO найти инфомрацию по анализам в БД и реализацивать
 //тут пока заглушка
 public class AnalysisEntity {

@@ -3,8 +3,7 @@ package com.project.vetfacade.bisentity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.project.vetfacade.pojo.PetDTO;
+import com.project.vetfacade.dto.PetDTO;
 import lombok.Getter;
 import lombok.Setter;
 

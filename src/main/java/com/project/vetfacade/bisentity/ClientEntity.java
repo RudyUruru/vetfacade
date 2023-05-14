@@ -1,8 +1,7 @@
 package com.project.vetfacade.bisentity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.project.vetfacade.pojo.ClientDTO;
-import com.project.vetfacade.pojo.ClientLightDTO;
+import com.project.vetfacade.dto.ClientLightDTO;
 import lombok.Getter;
 import lombok.Setter;
 

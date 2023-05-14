@@ -1,4 +1,4 @@
-package com.project.vetfacade.pojo;
+package com.project.vetfacade.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -6,10 +6,11 @@ import lombok.Setter;
 
 import java.util.List;
 
+
 @Getter
 @Setter
 @NoArgsConstructor
-public class ClientLightDTO {
+public class ClientDTO {
 
     private Long client_id;
 

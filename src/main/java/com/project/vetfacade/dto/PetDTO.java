@@ -1,6 +1,5 @@
-package com.project.vetfacade.pojo;
+package com.project.vetfacade.dto;
 
-import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -2,10 +2,9 @@ package com.project.vetfacade.bisentity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonIncludeProperties;
-import com.project.vetfacade.pojo.DiagnosesDTO;
-import com.project.vetfacade.pojo.VisitDTO;
-import com.project.vetfacade.pojo.VisitType;
+import com.project.vetfacade.dto.DiagnosesDTO;
+import com.project.vetfacade.dto.VisitDTO;
+import com.project.vetfacade.dto.VisitType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

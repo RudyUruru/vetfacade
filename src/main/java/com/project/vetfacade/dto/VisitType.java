@@ -1,4 +1,4 @@
-package com.project.vetfacade.pojo;
+package com.project.vetfacade.dto;
 
 
 import lombok.Getter;

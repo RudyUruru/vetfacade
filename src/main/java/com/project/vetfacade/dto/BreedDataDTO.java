@@ -1,4 +1,4 @@
-package com.project.vetfacade.pojo;
+package com.project.vetfacade.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,10 +8,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class DictionariesDataDTO {
+public class BreedDataDTO {
 
-    private Long id;
+    private Long breed_id;
 
     private String value;
-
 }
+

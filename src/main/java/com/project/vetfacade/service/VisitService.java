@@ -1,7 +1,7 @@
 package com.project.vetfacade.service;
 
 import com.project.vetfacade.bisentity.VisitHistoryEntity;
-import com.project.vetfacade.pojo.VisitDTO;
+import com.project.vetfacade.dto.VisitDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;

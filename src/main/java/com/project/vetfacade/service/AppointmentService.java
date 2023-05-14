@@ -2,7 +2,7 @@ package com.project.vetfacade.service;
 
 
 import com.project.vetfacade.bisentity.AppointmentEntity;
-import com.project.vetfacade.pojo.AppointmentDTO;
+import com.project.vetfacade.dto.AppointmentDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;

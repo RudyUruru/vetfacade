@@ -1,7 +1,7 @@
 package com.project.vetfacade.service;
 
 import com.project.vetfacade.bisentity.PetLightEntity;
-import com.project.vetfacade.pojo.PetLightDTO;
+import com.project.vetfacade.dto.PetLightDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;

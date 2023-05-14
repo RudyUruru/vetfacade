@@ -3,8 +3,8 @@ package com.project.vetfacade.service;
 
 import com.project.vetfacade.bisentity.BreedEntity;
 import com.project.vetfacade.bisentity.KindEntity;
-import com.project.vetfacade.pojo.BreedDataDTO;
-import com.project.vetfacade.pojo.TreesDataDTO;
+import com.project.vetfacade.dto.BreedDataDTO;
+import com.project.vetfacade.dto.TreesDataDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;

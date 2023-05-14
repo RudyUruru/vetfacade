@@ -1,4 +1,4 @@
-package com.project.vetfacade.pojo;
+package com.project.vetfacade.dto;
 
 public enum AppointmentType {
     VISIT,

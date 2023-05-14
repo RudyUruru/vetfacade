@@ -1,5 +1,6 @@
 package com.project.vetfacade.bisentity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.project.vetfacade.pojo.DictionariesDataDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ColorEntity {
     private Long color_id;
     private String color_name;

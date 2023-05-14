@@ -1,5 +1,7 @@
 package com.project.vetfacade.bisentity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.project.vetfacade.pojo.AppointmentDTO;
 import com.project.vetfacade.pojo.AppointmentType;
 import lombok.Getter;
@@ -9,10 +11,11 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AppointmentEntity{
     private Long appointment_id;
     private String doctor_name;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private LocalDateTime date;
     private AppointmentType type;
     private String description;

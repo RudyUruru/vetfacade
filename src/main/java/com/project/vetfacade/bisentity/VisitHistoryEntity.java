@@ -1,5 +1,8 @@
 package com.project.vetfacade.bisentity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import com.project.vetfacade.pojo.DiagnosesDTO;
 import com.project.vetfacade.pojo.VisitDTO;
 import com.project.vetfacade.pojo.VisitType;
@@ -14,12 +17,14 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class VisitHistoryEntity {
     private Long visit_id;
     private PetEntity pet;
     private List<AnalysisEntity> analyzes = new ArrayList<>();
     private List<DiagnosesDTO> diagnoses = new ArrayList<>();
     private String prescription;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private LocalDateTime date;
     private String recommendation;
     private VisitType type;

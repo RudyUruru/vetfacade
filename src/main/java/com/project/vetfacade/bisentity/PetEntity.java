@@ -1,5 +1,7 @@
 package com.project.vetfacade.bisentity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.project.vetfacade.pojo.PetDTO;
@@ -11,6 +13,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PetEntity {
     private Long pet_id;
     private ColorEntity color;
@@ -18,6 +21,7 @@ public class PetEntity {
     private String name;
     private BreedEntity breed;
     private SexEntity sex;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private LocalDateTime birthday;
     private KindEntity kind;
     @JsonProperty("chip_number")

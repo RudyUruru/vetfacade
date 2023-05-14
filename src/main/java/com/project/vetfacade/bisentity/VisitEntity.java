@@ -1,6 +1,8 @@
 package com.project.vetfacade.bisentity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.project.vetfacade.pojo.DiagnosesDTO;
 import com.project.vetfacade.pojo.VisitDTO;
 import com.project.vetfacade.pojo.VisitType;
@@ -13,10 +15,11 @@ import java.util.List;
 
 @Getter
 @Setter
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class VisitEntity {
 
     private Long visit_id;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private LocalDateTime date;
     private List<DiagnosesDTO> diagnoses;
     private PetEntity pet;

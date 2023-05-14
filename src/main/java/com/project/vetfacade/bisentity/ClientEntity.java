@@ -1,5 +1,6 @@
 package com.project.vetfacade.bisentity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.project.vetfacade.pojo.ClientDTO;
 import com.project.vetfacade.pojo.ClientLightDTO;
 import lombok.Getter;
@@ -7,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ClientEntity {
     private Long client_id;
     private String name;

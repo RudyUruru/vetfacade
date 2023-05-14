@@ -1,12 +1,13 @@
 package com.project.vetfacade.bisentity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.project.vetfacade.pojo.XPetsDiagsDTO;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AssignmentEntity {
 
     private String diagnosis;

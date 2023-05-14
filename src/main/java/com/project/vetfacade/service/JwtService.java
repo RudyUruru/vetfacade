@@ -19,8 +19,8 @@ public class JwtService {
 
     private String SECRET_KEY = "294A404E635266556A586E5A7234753778214125442A472D4B6150645367566B";
 
-    private static final long ACCESS_TOKEN_VALIDITY_SECONDS = 1800; // 30 минут
-    private static final long REFRESH_TOKEN_VALIDITY_SECONDS = 604800; // 1 неделя
+    private static final long ACCESS_TOKEN_VALIDITY_SECONDS = 30 * 60 * 1000L; // 30 минут
+    private static final long REFRESH_TOKEN_VALIDITY_SECONDS = 7 * 24 * 60 * 60 * 1000L; // 1 неделя
 
 
     public String extractUsername(String token) {
@@ -60,7 +60,7 @@ public class JwtService {
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + REFRESH_TOKEN_VALIDITY_SECONDS * 1000))
+                .setExpiration(new Date(System.currentTimeMillis() + REFRESH_TOKEN_VALIDITY_SECONDS))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -86,7 +86,7 @@ public class JwtService {
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS * 1000))
+                .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

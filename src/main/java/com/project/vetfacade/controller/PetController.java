@@ -1,16 +1,18 @@
 package com.project.vetfacade.controller;
 
 
-import com.project.vetfacade.UserInfo;
+import com.project.vetfacade.bisentity.PetEntity;
 import com.project.vetfacade.bisentity.PetLightEntity;
 import com.project.vetfacade.service.PetService;
 import com.project.vetfacade.user.User;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -21,8 +23,7 @@ public class PetController {
     @Autowired
     PetService petService;
 
-    //посмотреть
-    @CrossOrigin(origins = "*")
+
     @GetMapping("/pets")
     public ResponseEntity<List<PetLightEntity>> getPetsFiltered(
             @RequestParam @Nullable Long kind_id,
@@ -32,9 +33,11 @@ public class PetController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return ResponseEntity.ok(petService.getPets(user.getEmail(), kind_id, breed_id, name, max_count));
     }
-    @GetMapping("/pets_name")
-    public ResponseEntity<List<PetLightEntity>> getPetsByName(@RequestParam String name, @AuthenticationPrincipal User user) {
-        return ResponseEntity.ok(petService.getPetsByName(user.getEmail(), name));
+
+    @GetMapping("/get_pet")
+    public ResponseEntity<PetEntity> getPet(@RequestParam("pet_id") Long id) {
+        return ResponseEntity.ok(petService.getPetById(id));
     }
+
 
 }

@@ -1,11 +1,12 @@
 package com.project.vetfacade.service;
 
+import com.project.vetfacade.bisentity.PetEntity;
 import com.project.vetfacade.bisentity.PetLightEntity;
+import com.project.vetfacade.dto.PetDTO;
 import com.project.vetfacade.dto.PetLightDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.time.Duration;
@@ -24,7 +25,6 @@ public class PetService {
         this.localApiClient = localApiClient;
     }
 
-    @CrossOrigin(origins = "*")
     public List<PetLightEntity> getPets(String email, Long kind_id, Long breed_id, String name, Integer max_count) {
         StringBuilder uri = new StringBuilder(api);
         uri.append("pets?email=").append(email);
@@ -45,16 +45,15 @@ public class PetService {
         return pets.stream().map(PetLightEntity::toEntity).toList();
     }
 
-    public List<PetLightEntity> getPetsByName(String email, String name) {
+    public PetEntity getPetById(Long id) {
         StringBuilder uri = new StringBuilder(api);
-        uri.append("/pets_name?email=").append(email);
-        uri.append("&name=").append(name);
-        List<PetLightDTO> pets = localApiClient
+        uri.append("pet?id=").append(id);
+        PetDTO dto = localApiClient
                 .get()
                 .uri(uri.toString())
                 .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<List<PetLightDTO>>() {
-                }).block(REQUEST_TIMEOUT);
-        return pets.stream().map(PetLightEntity::toEntity).toList();
+                .bodyToMono(PetDTO.class)
+                .block(REQUEST_TIMEOUT);
+        return PetEntity.toEntity(dto);
     }
 }

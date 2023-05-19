@@ -14,7 +14,7 @@ import java.util.List;
 public class VisitDTO {
     private Long visit_id;
 
-    private PetDTO pet;
+    private PetLightDTO pet;
 
     private ClientDTO client;
 
@@ -31,5 +31,17 @@ public class VisitDTO {
     private Long first_visit_id;
 
     private List<XPetsDiagsDTO> diagnoses;
+
+    private String weight;
+
+    private String temperature;
+
+    private String heartBeat;
+
+    private String breathBeat;
+
+    private Long vaccineId;
+
+    private LocalDateTime nextVaccination;
 
 }

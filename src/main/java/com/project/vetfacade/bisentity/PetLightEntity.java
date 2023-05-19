@@ -2,6 +2,7 @@ package com.project.vetfacade.bisentity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.vetfacade.dto.PetLightDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +25,8 @@ public class PetLightEntity {
     private String name;
     private KindEntity kind;
     private BreedEntity breed;
-    private String chip_number;
+    @JsonProperty("chip_number")
+    private String chipNumber;
 
     public static PetLightEntity toEntity(PetLightDTO dto) {
         PetLightEntity entity = new PetLightEntity();
@@ -41,7 +43,7 @@ public class PetLightEntity {
         entity.setName(dto.getName());
         entity.setKind(KindEntity.toEntity(dto.getKind()));
         if (dto.getChipNumber() != null) {
-            entity.setChip_number(dto.getChipNumber());
+            entity.setChipNumber(dto.getChipNumber());
         }
         if (dto.getBreed() != null) {
             entity.setBreed(BreedEntity.toEntity(dto.getBreed()));

@@ -3,11 +3,14 @@ package com.project.vetfacade.bisentity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.project.vetfacade.dto.DiagnosesDTO;
 import com.project.vetfacade.dto.PetDTO;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Getter
@@ -25,7 +28,8 @@ public class PetEntity {
     private KindEntity kind;
     @JsonProperty("chip_number")
     private String chipNumber;
-
+    @JsonProperty("pet_diagnoses")
+    private List<DiagnosesDTO> diagnoses = new ArrayList<>();
 
 
     public PetEntity() {
@@ -52,6 +56,9 @@ public class PetEntity {
             entity.setChipNumber(dto.getChipNumber());
         }
         entity.setKind(KindEntity.toEntity(dto.getKind()));
+        if (dto.getDiagnoses() != null) {
+            dto.getDiagnoses().forEach(xPetsDiagnosis -> entity.getDiagnoses().add(xPetsDiagnosis.getDiagnosis()));
+        }
         return entity;
     }
 }

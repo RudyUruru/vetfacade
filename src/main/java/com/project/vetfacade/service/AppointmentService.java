@@ -23,12 +23,13 @@ public class AppointmentService {
         this.localApiClient = localApiClient;
     }
 
-    public List<AppointmentEntity> getAppointments(String email, Integer max_count) {
+    public List<AppointmentEntity> getAppointments(String email, Long petId, Integer max_count) {
         StringBuilder uri = new StringBuilder(api);
         uri.append("appointments?email=").append(email);
         if (max_count != null)
             uri.append("&max_count=").append(max_count);
-
+        if (petId != null)
+            uri.append("&petId=").append(petId);
         List<AppointmentDTO> list = localApiClient
                 .get()
                 .uri(uri.toString())

@@ -46,7 +46,7 @@ public class ClientService {
                 .bodyToMono(ClientLightDTO.class).block(REQUEST_TIMEOUT));
     }
 
-    public List<VisitEntity> getVisits(String email, Long kind_id, Long breed_id, LocalDateTime date1, LocalDateTime date2, Integer max_count) {
+    public List<VisitEntity> getVisits(String email, Long petId, Long kind_id, Long breed_id, LocalDateTime date1, LocalDateTime date2, Integer max_count) {
         StringBuilder uri = new StringBuilder(api);
         uri.append("visits?email=").append(email);
         if (kind_id!=null)
@@ -59,6 +59,8 @@ public class ClientService {
             uri.append("&date2=").append(date2);
         if (max_count!=null)
             uri.append("&max_count=").append(max_count);
+        if (petId != null)
+            uri.append("&petId=").append(petId);
         List<VisitDTO> list = localApiClient
                 .get()
                 .uri(uri.toString())

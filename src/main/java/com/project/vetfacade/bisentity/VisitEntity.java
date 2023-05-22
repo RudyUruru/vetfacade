@@ -26,6 +26,7 @@ public class VisitEntity {
     private List<DiagnosesDTO> diagnoses;
     private PetLightEntity pet;
     private VisitType type;
+
     @JsonProperty("first_visit_id")
     private Long firstVisitId;
 
@@ -46,6 +47,12 @@ public class VisitEntity {
     @JsonProperty("next_vaccination")
     private LocalDateTime nextVaccination;
 
+    private String anamnesis;
+
+    private String prescription;
+
+    private String recommendation;
+
     public static VisitEntity toEntity(VisitDTO dto) {
         VisitEntity entity = new VisitEntity();
         entity.setVisitId(dto.getVisit_id());
@@ -65,6 +72,9 @@ public class VisitEntity {
         entity.setTemperature(dto.getTemperature());
         entity.setVaccineId(dto.getVaccineId());
         entity.setNextVaccination(dto.getNextVaccination());
+        entity.setAnamnesis(dto.getAnamnesis());
+        entity.setPrescription(dto.getPrescription());
+        entity.setRecommendation(dto.getRecommendation());
         return entity;
     }
     public VisitEntity() {}

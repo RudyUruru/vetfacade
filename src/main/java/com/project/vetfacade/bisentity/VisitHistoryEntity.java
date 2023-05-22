@@ -31,6 +31,9 @@ public class VisitHistoryEntity {
     @JsonProperty("first_visit_id")
     private Long firstVisitId;
 
+    private String anamnesis;
+
+
     private String weight;
 
     private String temperature;
@@ -54,8 +57,7 @@ public class VisitHistoryEntity {
         entity.setDate(dto.getDate());
         entity.getAnalyzes().add(new AnalysisEntity());
         dto.getDiagnoses().forEach(xPetsDiagnosis -> entity.getDiagnoses().add(xPetsDiagnosis.getDiagnosis()));
-        entity.setPrescription(dto.getPrescription());
-        entity.setRecommendation(dto.getRecommendation());
+
         switch(dto.getType()) {
             case 101: entity.setType(VisitType.FIRST); break;
             case 102: entity.setType(VisitType.SECONDARY); break;
@@ -68,6 +70,9 @@ public class VisitHistoryEntity {
         entity.setTemperature(dto.getTemperature());
         entity.setVaccineId(dto.getVaccineId());
         entity.setNextVaccination(dto.getNextVaccination());
+        entity.setAnamnesis(dto.getAnamnesis());
+        entity.setPrescription(dto.getPrescription());
+        entity.setRecommendation(dto.getRecommendation());
         return entity;
     }
 }

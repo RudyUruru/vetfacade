@@ -5,18 +5,21 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 @Getter
 @Setter
 @NoArgsConstructor
-public class VisitDTO {
+public class VisitSimpleDTO {
+
     private Long visit_id;
 
-    private PetLightDTO pet;
 
-    private ClientDTO client;
+
+    private Long petId;
+
+
+    private Long clientId;
 
     private LocalDateTime date;
 
@@ -29,8 +32,6 @@ public class VisitDTO {
     private Integer type;
 
     private Long first_visit_id;
-
-    private List<XPetsDiagsDTO> diagnoses;
 
     private String weight;
 

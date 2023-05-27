@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.vetfacade.dto.DiagnosesDTO;
+import com.project.vetfacade.dto.DictionariesDataDTO;
 import com.project.vetfacade.dto.VisitDTO;
 import com.project.vetfacade.dto.VisitType;
 import lombok.Getter;
@@ -44,8 +45,7 @@ public class VisitHistoryEntity {
     @JsonProperty("breath_beat")
     private String breathBeat;
 
-    @JsonProperty("vaccine_id")
-    private Long vaccineId;
+    private DictionariesDataDTO vaccine;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     @JsonProperty("next_vaccination")
@@ -58,17 +58,20 @@ public class VisitHistoryEntity {
         entity.getAnalyzes().add(new AnalysisEntity());
         dto.getDiagnoses().forEach(xPetsDiagnosis -> entity.getDiagnoses().add(xPetsDiagnosis.getDiagnosis()));
 
-        switch(dto.getType()) {
-            case 101: entity.setType(VisitType.FIRST); break;
-            case 102: entity.setType(VisitType.SECONDARY); break;
-            case 112: entity.setType(VisitType.VACCINATION); break;
+        if (dto.getType() != null) {
+            switch (dto.getType()) {
+                case 101 -> entity.setType(VisitType.FIRST);
+                case 102 -> entity.setType(VisitType.SECONDARY);
+                case 112 -> entity.setType(VisitType.VACCINATION);
+                default -> throw new IllegalStateException("Unexpected value: " + dto.getType());
+            }
         }
         entity.setFirstVisitId(dto.getFirst_visit_id());
         entity.setWeight(dto.getWeight());
         entity.setHeartBeat(dto.getHeartBeat());
         entity.setBreathBeat(dto.getBreathBeat());
         entity.setTemperature(dto.getTemperature());
-        entity.setVaccineId(dto.getVaccineId());
+        entity.setVaccine(dto.getVaccine());
         entity.setNextVaccination(dto.getNextVaccination());
         entity.setAnamnesis(dto.getAnamnesis());
         entity.setPrescription(dto.getPrescription());

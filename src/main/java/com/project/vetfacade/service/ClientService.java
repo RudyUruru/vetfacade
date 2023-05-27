@@ -29,7 +29,7 @@ public class ClientService {
 
 
     public AnalysisEntity getAnalysis(String email) {
-        return new AnalysisEntity();
+        return AnalysisEntity.toEntity();
     }
 
     public ConfigurationEntity getClinicInformation() {

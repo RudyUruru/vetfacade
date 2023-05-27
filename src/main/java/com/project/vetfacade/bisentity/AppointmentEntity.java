@@ -3,6 +3,7 @@ package com.project.vetfacade.bisentity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.project.vetfacade.dto.AppointmentDTO;
+import com.project.vetfacade.dto.AppointmentStatus;
 import com.project.vetfacade.dto.AppointmentType;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,7 @@ public class AppointmentEntity{
     private AppointmentType type;
     private String description;
     private PetLightEntity pet;
+    private AppointmentStatus status;
 
     public static AppointmentEntity toEntity(AppointmentDTO dto) {
         AppointmentEntity entity = new AppointmentEntity();
@@ -29,6 +31,10 @@ public class AppointmentEntity{
         entity.setType(dto.getType());
         entity.setPet(PetLightEntity.toEntity(dto.getPet()));
         entity.setDescription(dto.getDescription());
+        if (entity.getDate().isAfter(LocalDateTime.now()))
+            entity.setStatus(AppointmentStatus.WAITING);
+        else
+            entity.setStatus(AppointmentStatus.COMPLETED);
         return entity;
     }
     public AppointmentEntity() {

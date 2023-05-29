@@ -1,7 +1,6 @@
 package com.project.vetfacade.config;
 
 
-import com.project.vetfacade.user.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +27,7 @@ public class SecurityConfig {
                 .cors().and()
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v5/auth/*", "/registration/*")
+                .requestMatchers("/api/v5/auth/*", "/registration/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

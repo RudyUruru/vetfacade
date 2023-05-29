@@ -28,7 +28,11 @@ public class User implements UserDetails {
 
     private String password;
 
+    @Column(name = "activation_code")
     private String activationCode;
+
+    @Column(name = "has_unread_notifications")
+    private Boolean hasUnreadNotifications;
 
     @Enumerated(EnumType.STRING)
     private Role role;

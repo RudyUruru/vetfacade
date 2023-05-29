@@ -62,5 +62,14 @@ public class ClientController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return ResponseEntity.ok(clientService.getVisits(user.getEmail(), petId, kind_id, breed_id, date1, date2, max_count));
     }
+
+    /*@PostMapping
+    public ResponseEntity make_appointment(@RequestParam("pet_name") String petName,
+                                           @RequestParam("client_name") String clientName,
+                                           @RequestParam String email,
+                                           @RequestParam LocalDateTime datetime,
+                                           @RequestParam String surgeon) {
+        return ResponseEntity.ok();
+    }*/
 }
 

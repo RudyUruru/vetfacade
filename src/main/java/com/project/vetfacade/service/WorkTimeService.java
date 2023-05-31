@@ -1,0 +1,37 @@
+package com.project.vetfacade.service;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.project.vetfacade.bisentity.WorkTimeEntity;
+import com.project.vetfacade.dto.AppointmentDTO;
+import com.project.vetfacade.dto.ManipulationDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class WorkTimeService {
+    private final WebClient localApiClient;
+    private static final Duration REQUEST_TIMEOUT = Duration.ofSeconds(3);
+    private static final String api = "api/v1/";
+
+    @Autowired
+    public WorkTimeService(WebClient localApiClient) {
+        this.localApiClient = localApiClient;
+    }
+    public WorkTimeEntity getFreeTime(Long doctorId, LocalDateTime date) {
+        StringBuilder uri = new StringBuilder(api);
+        uri.append("get_free_time?doctor_id=").append(doctorId).append("&date=").append(date);
+        List<LocalDateTime> freeTimeList = localApiClient
+                .get()
+                .uri(uri.toString())
+                .retrieve()
+                .bodyToMono(new ParameterizedTypeReference<List<LocalDateTime>>() {}).block(REQUEST_TIMEOUT);
+        return WorkTimeEntity.toEntity(freeTimeList);
+    }
+}

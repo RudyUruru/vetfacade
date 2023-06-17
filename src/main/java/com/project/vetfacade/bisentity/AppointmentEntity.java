@@ -31,7 +31,7 @@ public class AppointmentEntity{
         entity.setType(dto.getType());
         entity.setPet(PetLightEntity.toEntity(dto.getPet()));
         entity.setDescription(dto.getDescription());
-        if (entity.getDate().isAfter(LocalDateTime.now()))
+        if (dto.getDate().isAfter(LocalDateTime.now()))
             entity.setStatus(AppointmentStatus.WAITING);
         else
             entity.setStatus(AppointmentStatus.COMPLETED);
